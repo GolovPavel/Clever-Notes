@@ -1,0 +1,39 @@
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link href="css/templateNote.css" rel="stylesheet"/>
+
+<div class="col-md-3">
+  <div class="well note">
+    <p class="text-center caption">%Caption</p>
+    <hr class="devider">
+    <p class="content">%Content</p>
+    <a class="removeButton" href="#" onclick="removeNote(%Id)"><span class = "glyphicon glyphicon-remove"></span></a>
+    <a class="editButton" href="#"><span class = "glyphicon glyphicon-cog"></span></a>
+  </div>
+</div>
+
+<form id="formform" name="f1" method="post" action="javascript:void(null);">
+  <input name="link" type="hidden" value="index.php" />
+  Логин: <br />
+  <input name="login" type="text" size="25" maxlength="30" value="Вася" /> <br />
+  Пароль: <br />
+  <input name="pd" type="password" size="25" maxlength="30" value="" /> <br />
+  <input name="remember" type="checkbox" value="yes" /> Запомнить <br />
+  <input type="submit" name="enter" value="Вход" />
+</form>
+
+<script>
+function varf() {
+  $("#formform").submit(function() {
+    lol();
+  });
+}
+
+function lol() {
+  alert("lol");
+}
+
+
+varf();
+</script>
