@@ -13,7 +13,8 @@ import ru.pavel.noteproject.model.User;
 public class TokenDao {
     private static TokenDao instance;
 
-    private TokenDao() {}
+    private TokenDao() {
+    }
 
     public static TokenDao getInstance() {
         if (instance == null) {
@@ -43,7 +44,7 @@ public class TokenDao {
     }
 
     public User getUserByToken(Session session, String token) {
-       return getTokenByToken(session, token)
-               .getUser();
+        return getTokenByToken(session, token)
+                .getUser();
     }
 }

@@ -32,7 +32,6 @@ public class NoteServer {
     }
 
 
-
     private static ContextHandler createResourceContext() {
         ContextHandler context = new ContextHandler();
         context.setContextPath("/");

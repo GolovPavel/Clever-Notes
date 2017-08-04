@@ -1,7 +1,5 @@
 package ru.pavel.noteproject.model;
 
-import org.hibernate.annotations.GeneratorType;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -19,7 +17,7 @@ public class Note implements Serializable {
     @Column(name = "caption", nullable = false)
     private String caption;
 
-    @Column(name="content")
+    @Column(name = "content")
     private String content;
 
     @ManyToOne(cascade = CascadeType.PERSIST)

@@ -32,7 +32,7 @@ public class NoteService {
     public void addNote(String token, String capture, String content) throws NoteException {
         Transaction tnx = null;
 
-        try(Session session = Database.session()) {
+        try (Session session = Database.session()) {
             tnx = session.beginTransaction();
 
             User currentUser = TokenDao.getInstance().getUserByToken(session, token);
@@ -59,7 +59,7 @@ public class NoteService {
     public void deleteNote(long noteId) throws NoteException {
         Transaction tnx = null;
 
-        try (Session session = Database.session()){
+        try (Session session = Database.session()) {
             tnx = session.beginTransaction();
             Note note = NoteDao.getInstance().getNoteById(session, noteId);
             NoteDao.getInstance().deleteNote(session, note);
@@ -78,7 +78,7 @@ public class NoteService {
     public void updateNote(long noteId, String caption, String content) throws NoteException {
         Transaction tnx = null;
 
-        try (Session session = Database.session()){
+        try (Session session = Database.session()) {
             tnx = session.beginTransaction();
             NoteDao.getInstance().updateNote(session, noteId, caption, content);
             tnx.commit();
