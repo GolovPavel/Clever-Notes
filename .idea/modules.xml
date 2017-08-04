@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Clever_notes.iml" filepath="$PROJECT_DIR$/.idea/modules/Clever_notes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Clever_notes_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Clever_notes_main.iml" group="Clever_notes" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Clever_notes_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Clever_notes_test.iml" group="Clever_notes" />
+    </modules>
+  </component>
+</project>

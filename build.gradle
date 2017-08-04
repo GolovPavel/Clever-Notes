@@ -3,6 +3,7 @@ version '1.0'
 
 apply plugin: 'java'
 apply plugin: 'checkstyle'
+apply plugin: 'eclipse'
 
 sourceCompatibility = 1.8
 
@@ -37,4 +38,15 @@ dependencies {
 
 checkstyle {
     configFile = new File(rootDir, "checkstyle.xml")
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Jar File Example',
+                'Implementation-Version': version,
+                'Main-Class': 'ru.pavel.noteproject.NoteServer'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
