@@ -13,7 +13,6 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -53,14 +52,13 @@ public class Database {
 //            throw e;
 //        }
 
-        Map<String, String> map = System.getenv();
-        String dbUrl = System.getenv("JDBS_DATABASE_URL");
-        String dbUserName = System.getenv("JDBC_DATABASE_USERNAME");
-        String dbPassword = System.getenv("JDBC_DATABASE_PASSWORD");
+//        String dbUrl = System.getenv("JDBC_DATABASE_URL");
+//        String dbUserName = System.getenv("JDBC_DATABASE_USERNAME");
+//        String dbPassword = System.getenv("JDBC_DATABASE_PASSWORD");
         Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
-        configuration.setProperty("hibernate.connection.url", dbUrl);
-        configuration.setProperty("hibernate.connection.username", dbUserName);
-        configuration.setProperty("hibernate.connection.password", dbPassword);
+        configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://ec2-184-73-247-240.compute-1.amazonaws.com:5432/dbv8ojr9ftube6?user=yqcucckevumtds&password=41c5d7ccdb224b3f864cb1c036560bb3be9c430b49e8bcce4415ce056f035cd9&sslmode=require");
+        configuration.setProperty("hibernate.connection.username", "yqcucckevumtds");
+        configuration.setProperty("hibernate.connection.password", "41c5d7ccdb224b3f864cb1c036560bb3be9c430b49e8bcce4415ce056f035cd9");
         sessionFactory = configuration.buildSessionFactory();
 
     }
