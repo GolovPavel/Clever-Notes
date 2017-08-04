@@ -24,8 +24,8 @@ public class NoteServer {
                 createServletContext()
 
         });
-        int port = Integer.parseInt(System.getenv("PORT"));
-        jettyServer = new Server(port);
+//        int port = Integer.parseInt(System.getenv("PORT"));
+        jettyServer = new Server(8080);
         jettyServer.setHandler(contexts);
 
         jettyServer.start();
