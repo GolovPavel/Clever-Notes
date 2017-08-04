@@ -9,9 +9,11 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -39,17 +41,28 @@ public class Database {
      */
     public static void setUp() throws Exception {
         // A SessionFactory is set up once for an application!
-        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure() // configures settings from hibernate.cfg.xml
-                .build();
-        try {
-            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-        } catch (Exception e) {
+//        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+//                .configure() // configures settings from hibernate.cfg.xml
+//                .build();
+//        try {
+//            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+//        } catch (Exception e) {
             // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
             // so destroy it manually.
-            StandardServiceRegistryBuilder.destroy(registry);
-            throw e;
-        }
+//            StandardServiceRegistryBuilder.destroy(registry);
+//            throw e;
+//        }
+
+        Map<String, String> map = System.getenv();
+        String dbUrl = System.getenv("JDBS_DATABASE_URL");
+        String dbUserName = System.getenv("JDBC_DATABASE_USERNAME");
+        String dbPassword = System.getenv("JDBC_DATABASE_PASSWORD");
+        Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
+        configuration.setProperty("hibernate.connection.url", dbUrl);
+        configuration.setProperty("hibernate.connection.username", dbUserName);
+        configuration.setProperty("hibernate.connection.password", dbPassword);
+        sessionFactory = configuration.buildSessionFactory();
+
     }
 
     /**
