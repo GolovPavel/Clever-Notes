@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.9">
+<file name="/home/pavel/Repositories/Clever_notes/src/main/java/ru/pavel/noteproject/AuthResources.java">
+</file>
+<file name="/home/pavel/Repositories/Clever_notes/src/main/java/ru/pavel/noteproject/CrossBrowserFilter.java">
+</file>
+<file name="/home/pavel/Repositories/Clever_notes/src/main/java/ru/pavel/noteproject/NoteResources.java">
+</file>
+<file name="/home/pavel/Repositories/Clever_notes/src/main/java/ru/pavel/noteproject/NoteServer.java">
+</file>
+<file name="/home/pavel/Repositories/Clever_notes/src/main/java/ru/pavel/noteproject/dao/Database.java">
+</file>
+<file name="/home/pavel/Repositories/Clever_notes/src/main/java/ru/pavel/noteproject/dao/NoteDao.java">
+</file>
+<file name="/home/pavel/Repositories/Clever_notes/src/main/java/ru/pavel/noteproject/dao/TokenDao.java">
+</file>
+<file name="/home/pavel/Repositories/Clever_notes/src/main/java/ru/pavel/noteproject/dao/UserDao.java">
+</file>
+<file name="/home/pavel/Repositories/Clever_notes/src/main/java/ru/pavel/noteproject/model/Note.java">
+</file>
+<file name="/home/pavel/Repositories/Clever_notes/src/main/java/ru/pavel/noteproject/model/Token.java">
+</file>
+<file name="/home/pavel/Repositories/Clever_notes/src/main/java/ru/pavel/noteproject/model/User.java">
+</file>
+<file name="/home/pavel/Repositories/Clever_notes/src/main/java/ru/pavel/noteproject/service/AuthService.java">
+</file>
+<file name="/home/pavel/Repositories/Clever_notes/src/main/java/ru/pavel/noteproject/service/NoteException.java">
+</file>
+<file name="/home/pavel/Repositories/Clever_notes/src/main/java/ru/pavel/noteproject/service/NoteService.java">
+</file>
+<file name="/home/pavel/Repositories/Clever_notes/src/main/java/ru/pavel/noteproject/service/UserException.java">
+</file>
+</checkstyle>
