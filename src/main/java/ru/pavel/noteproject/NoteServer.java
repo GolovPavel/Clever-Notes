@@ -25,6 +25,7 @@ public class NoteServer {
 
         });
         int port = Integer.parseInt(System.getenv("PORT"));
+        System.out.println("The port is " + port);
         jettyServer = new Server(port);
         jettyServer.setHandler(contexts);
 
