@@ -1,5 +1,7 @@
 package ru.pavel.noteproject;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.ContextHandler;
@@ -8,11 +10,14 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import ru.pavel.noteproject.dao.Database;
+import ru.pavel.noteproject.service.AuthService;
 
 /**
  * Created by pavel on 22.07.17.
  */
 public class NoteServer {
+
+    private static final Logger LOGGER = LogManager.getLogger(NoteServer.class);
 
     private static Server jettyServer;
 
@@ -25,7 +30,8 @@ public class NoteServer {
 
         });
         int port = Integer.parseInt(System.getenv("PORT"));
-        System.out.println("The port is " + port);
+
+        LOGGER.info("The port is {}", port);
         jettyServer = new Server(port);
         jettyServer.setHandler(contexts);
 
