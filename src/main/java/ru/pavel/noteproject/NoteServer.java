@@ -10,7 +10,7 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import ru.pavel.noteproject.dao.Database;
-import ru.pavel.noteproject.service.AuthService;
+
 
 /**
  * Created by pavel on 22.07.17.
