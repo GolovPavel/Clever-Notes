@@ -12,28 +12,3 @@
     <a class="editButton" href="#"><span class = "glyphicon glyphicon-cog"></span></a>
   </div>
 </div>
-
-<form id="formform" name="f1" method="post" action="javascript:void(null);">
-  <input name="link" type="hidden" value="index.php" />
-  Логин: <br />
-  <input name="login" type="text" size="25" maxlength="30" value="Вася" /> <br />
-  Пароль: <br />
-  <input name="pd" type="password" size="25" maxlength="30" value="" /> <br />
-  <input name="remember" type="checkbox" value="yes" /> Запомнить <br />
-  <input type="submit" name="enter" value="Вход" />
-</form>
-
-<script>
-function varf() {
-  $("#formform").submit(function() {
-    lol();
-  });
-}
-
-function lol() {
-  alert("lol");
-}
-
-
-varf();
-</script>

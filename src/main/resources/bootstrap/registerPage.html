@@ -65,6 +65,7 @@
               <form action="javascript:void(null);" method="post" class="form-signin" id="nameform" onsubmit="register()" role="form">
                 <h2 class="form-signin-heading text-center">Please sign up</h2>
                 <h4 class="text-center" id="warningMessage"></h4>
+                <h4 class="text-center" id="successMessage"></h4>
                 <input type="email" name="login" class="form-control email" placeholder="Email address" required autofocus>
                 <input type="password" name="password" class="form-control password" placeholder="Password" required>
                 <input type="password" name="passwordRepeat"  class="form-control repeatPass" placeholder="Repeat password" required>
@@ -101,8 +102,8 @@
           }
 
           $.ajax(settings).done(function(response) {
-              alert("Registration successful!\nNow you can sign in.")
-              window.location = "/loginPage.html";
+              $("#successMessage").html('Registration success!</br> Now, you can <a href="loginPage.html">sign in</a>');
+              $('#nameform')[0].reset();
           }).fail(function (jqXHR, textStatus) {
               $("#warningMessage").html(jqXHR.responseText);
               console.log(jqXHR.status + " " + jqXHR.statusText + ". " + jqXHR.responseText);

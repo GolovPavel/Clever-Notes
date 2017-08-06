@@ -40,6 +40,10 @@ html {
   color: rgb(179, 0, 0);
 }
 
+#successMessage {
+  color: rgb(29, 101, 0);
+}
+
 .form-signin {
   max-width: 330px;
   padding: 15px;
