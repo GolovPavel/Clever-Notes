@@ -76,7 +76,6 @@
           </ul>
           <ul class = "nav navbar-nav navbar-left">
             <li class="active"><a href="index.html">Home</a></li>
-            <li><a href="#">FAQ</a></li>
             <li><a href="addNote.html">Add new note</a></li>
           </ul>
         </div>
@@ -128,8 +127,7 @@
           Cookies.remove('token');
           window.location = "welcomePage.html";
         }).fail(function (jqXHR, textStatus) {
-          alert(jqXHR.responseText);
-          console.log(jqXHR.status + " " + jqXHR.statusText + ". " + jqXHR.responseText);
+          deleteCookies(jqXHR);
         });
       }
 
@@ -173,18 +171,7 @@
             });
           }
         }).fail(function (jqXHR, textStatus) {
-          if (jqXHR.responseText === "User not logged") {
-            if(Cookies.get('login') != undefined) {
-              Cookies.remove('login');
-            }
-            if (Cookies.get('token') != undefined) {
-              Cookies.remove('token');
-            }
-            window.location = "/";
-          } else {
-            console.log(jqXHR.status + " " + jqXHR.statusText + ". " + jqXHR.responseText);
-            alert(jqXHR.responseText);
-          }
+          deleteCookies(jqXHR);
         });
       }
 
@@ -204,8 +191,7 @@
           $.ajax(settings).done(function(response) {
             window.location = "/";
           }).fail(function (jqXHR, textStatus) {
-            alert(jqXHR.responseText);
-            console.log(jqXHR.status + " " + jqXHR.statusText + ". " + jqXHR.responseText);
+            deleteCookies(jqXHR);
           });
         }
       }
@@ -234,8 +220,7 @@
             editNote(id);
           });
         }).fail(function (jqXHR, textStatus) {
-          alert(jqXHR.responseText);
-          console.log(jqXHR.status + " " + jqXHR.statusText + ". " + jqXHR.responseText);
+          deleteCookies(jqXHR);
         });
       }
 
@@ -265,9 +250,19 @@
         $.ajax(settings).done(function(response) {
           window.location = "/";
         }).fail(function (jqXHR, textStatus) {
-          alert(jqXHR.responseText);
-          console.log(jqXHR.status + " " + jqXHR.statusText + ". " + jqXHR.responseText);
+          deleteCookies(jqXHR);
         });
+      }
+
+      function deleteCookies(jqXHR) {
+        if(Cookies.get('login') != undefined) {
+          Cookies.remove('login');
+        }
+        if (Cookies.get('token') != undefined) {
+          Cookies.remove('token');
+        }
+        console.log(jqXHR.status + " " + jqXHR.statusText + ". " + jqXHR.responseText);
+        window.location = "/";
       }
     </script>
   </body>
