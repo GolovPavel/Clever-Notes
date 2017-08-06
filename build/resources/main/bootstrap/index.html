@@ -173,8 +173,18 @@
             });
           }
         }).fail(function (jqXHR, textStatus) {
-          alert(jqXHR.responseText);
-          console.log(jqXHR.status + " " + jqXHR.statusText + ". " + jqXHR.responseText);
+          if (jqXHR.responseText === "User not logged") {
+            if(Cookies.get('login') != undefined) {
+              Cookies.remove('login');
+            }
+            if (Cookies.get('token') != undefined) {
+              Cookies.remove('token');
+            }
+            window.location = "/";
+          } else {
+            console.log(jqXHR.status + " " + jqXHR.statusText + ". " + jqXHR.responseText);
+            alert(jqXHR.responseText);
+          }
         });
       }
 
