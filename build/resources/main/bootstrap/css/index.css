@@ -95,14 +95,14 @@ html {
 /*End no note message selectors*/
 
 /*Buttons of note*/
-.wrap .removeButton {
+.removeButton {
   position: absolute;
-  right: 0.2vw; bottom: 0.2vw; /* Левый нижний угол */
+  right: 0.2vw;
+  top: 0.2vw;
 }
-
-.wrap .editButton {
+.editButton {
   position: absolute;
-  right: 1.5vw; bottom: 0.2vw; /* Левый нижний угол */
+  right: 0.2vw; bottom: 0.2vw;
 }
 /*End buttons of note*/
 
