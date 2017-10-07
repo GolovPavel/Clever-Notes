@@ -11,7 +11,9 @@ public class Token implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+
     @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "user_id", unique = true)
     private User user;
 
     @Column(name = "token", nullable = false, unique = true)
