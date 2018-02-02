@@ -29,8 +29,9 @@ public class NoteServer {
                 createServletContext()
 
         });
-        int port = Integer.parseInt(System.getenv("PORT"));
 
+        int port = getPort();
+        
         LOGGER.info("The port is {}", port);
         jettyServer = new Server(port);
         jettyServer.setHandler(contexts);
@@ -69,6 +70,11 @@ public class NoteServer {
         );
 
         return context;
+    }
+
+    private static int getPort() {
+        String port = System.getenv("PORT");
+        return port == null ? 8080 : Integer.parseInt(port);
     }
 
     public static void stopServer() throws Exception {
