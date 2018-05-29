@@ -26,7 +26,7 @@ import java.util.List;
 @Path("/notes")
 public class NoteResources {
 
-    /**
+    /**а
      * Method add new note to database
      *
      * @param json - json object, matching the pattern:
@@ -185,7 +185,6 @@ public class NoteResources {
      * @param data - data in format "token&id", where id - identificatior of note;
      * @return Response object.
      */
-    //TODO ADD AUTHORIZED ANOTATION!!!!!!!!!!!!!!!!!
     @POST
     @Path("/delete")
     @Consumes("application/x-www-form-urlencoded")

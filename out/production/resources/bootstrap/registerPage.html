@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Golov Pavel">
+
+    <title>Sign up</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="js/js.cookie.js"></script>
+    <script>
+      if (Cookies.get('login') !== undefined) {
+        window.location = "index.html";
+      }
+    </script>
+  </head>
+
+  <body>
+
+    <!-- Site menu-->
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="welcomePage.html">Clever Notes</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-main">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <button type="button" class="btn btn-primary navbar-btn" onclick='location.href="loginPage.html"'>Sign in</button>
+              <button type="button" class="btn active btn-primary navbar-btn" onclick='location.href="#"'>Sign up</button>
+            </li>
+          </ul>
+          <ul class = "nav navbar-nav navbar-left">
+            <li><a href="welcomePage.html">Home</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!--End site menu -->
+
+    <div id="wrapper" class="container">
+        <div class="container">
+           <div id="panel" class="col-md-offset-2 col-md-8 col-md-offset-2">
+              <form action="javascript:void(null);" method="post" class="form-signin" id="nameform" onsubmit="register()" role="form">
+                <h2 class="form-signin-heading text-center">Please sign up</h2>
+                <h4 class="text-center" id="warningMessage"></h4>
+                <h4 class="text-center" id="successMessage"></h4>
+                <input type="email" name="login" class="form-control email" placeholder="Email address" required autofocus>
+                <input type="password" name="password" class="form-control password" placeholder="Password" required>
+                <input type="password" name="passwordRepeat"  class="form-control repeatPass" placeholder="Repeat password" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+              </form>
+          </div>
+        </div>
+    </div> <!-- /container -->
+
+    <div id="footer">
+      <div class="container">
+        <span id="footerText">Golov Pavel. All rights reserved.</span>
+      </div>
+    </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      function register() {
+        var credentials = $('#nameform').serializeArray();
+
+        var password = credentials[1].value;
+        var repeatPassword = credentials[2].value;
+
+        if (password === repeatPassword) {
+          var settings = {
+            "method": "POST",
+            "crossDomain": true,
+            "url": "/service/auth/register",
+            "data": credentials
+          }
+
+          $.ajax(settings).done(function(response) {
+              $("#successMessage").html('Registration success!</br> Now, you can <a href="loginPage.html">sign in</a>');
+              $('#nameform')[0].reset();
+          }).fail(function (jqXHR, textStatus) {
+              $("#warningMessage").html(jqXHR.responseText);
+              console.log(jqXHR.status + " " + jqXHR.statusText + ". " + jqXHR.responseText);
+          });
+        } else {
+          $("#warningMessage").html("Passwords do not match")
+        }
+
+
+      }
+    </script>
+  </body>
+</html>

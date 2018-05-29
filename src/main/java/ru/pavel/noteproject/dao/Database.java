@@ -39,28 +39,11 @@ public class Database {
      * This is preferred way to initialize SessionFactory
      */
     public static void setUp() throws Exception {
-        // A SessionFactory is set up once for an application!
-//        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-//                .configure() // configures settings from hibernate.cfg.xml
-//                .build();
-//        try {
-//            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-//        } catch (Exception e) {
-            // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
-            // so destroy it manually.
-//            StandardServiceRegistryBuilder.destroy(registry);
-//            throw e;
-//        }
-
-//        String dbUrl = System.getenv("JDBC_DATABASE_URL");
-//        String dbUserName = System.getenv("JDBC_DATABASE_USERNAME");
-//        String dbPassword = System.getenv("JDBC_DATABASE_PASSWORD");
         Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
         configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://ec2-184-73-247-240.compute-1.amazonaws.com:5432/dbv8ojr9ftube6?user=yqcucckevumtds&password=41c5d7ccdb224b3f864cb1c036560bb3be9c430b49e8bcce4415ce056f035cd9&sslmode=require");
         configuration.setProperty("hibernate.connection.username", "yqcucckevumtds");
         configuration.setProperty("hibernate.connection.password", "41c5d7ccdb224b3f864cb1c036560bb3be9c430b49e8bcce4415ce056f035cd9");
         sessionFactory = configuration.buildSessionFactory();
-
     }
 
     /**

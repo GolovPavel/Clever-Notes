@@ -38,7 +38,6 @@ public class NoteDao {
     public Note getNoteById(Session session, long id) {
         Criteria criteria = session.createCriteria(Note.class);
         return (Note) criteria.add(Restrictions.eq("id", id)).uniqueResult();
-//        return (Note) session.load(Note.class, id);
     }
 
     public void deleteNote(Session session, Note note) {

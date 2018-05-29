@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Main page</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <link href="css/index.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Check Cookies script -->
+    <script src="js/js.cookie.js"></script>
+    <script>
+      if (Cookies.get('login') === undefined) {
+        window.location = "welcomePage.html";
+      }
+    </script>
+  </head>
+  <body onload="getNotes()">
+  <!-- <body> -->
+
+    <!-- Modal box -->
+    <div id="myModalBox" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h4><strong>Edit note</strong></h4>
+          </div>
+            <div class="modal-body">
+              <form id="formform" action="javascript:void(null);" method="post" class="form-signin" role="form">
+                <div class="form-group text-center">
+                  <label for="inputCaption">Caption of note:</label>
+                  <input type="text" name="caption" class="form-control" id="inputCaption" placeholder="Type caption" required autofocus>
+                </div>
+                <div class="form-group text-center">
+                  <label for="inputContent">Content:</label>
+                  <textarea class="form-control" name="content" rows="6" id="inputContent"  placeholder="Type content" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Save</button>
+                <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- End modal box -->
+
+    <!-- Site menu-->
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">Clever Notes</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-main">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <button type="button" class="btn btn-primary navbar-btn" onclick='logout()'>Logout</button>
+            </li>
+          </ul>
+          <ul class = "nav navbar-nav navbar-left">
+            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="addNote.html">Add new note</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!--End site menu -->
+
+
+    <div id="wrapper" class = "container wrap">
+      <!-- The place for notes -->
+    </div>
+
+
+    <!-- Footer -->
+    <div id="footer">
+      <div class="container">
+        <span id="footerText">Golov Pavel. All rights reserved.</span>
+      </div>
+    </div>
+    <!-- End footer -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Custom scripts -->
+    <script>
+      //Tools
+      String.prototype.replaceAll = function(search, replace){
+        return this.split(search).join(replace);
+      };
+
+
+      //Logout user
+      function logout() {
+        var userToken = Cookies.get('token');
+
+        var settings = {
+          "method": "POST",
+          "crossDomain": true,
+          "url": "/service/auth/logout",
+          "data": {
+            token: userToken
+          }
+        };
+        $.ajax(settings).done(function(response) {
+          Cookies.remove('login');
+          Cookies.remove('token');
+          window.location = "welcomePage.html";
+        }).fail(function (jqXHR, textStatus) {
+          deleteCookies(jqXHR);
+        });
+      }
+
+      //Display all notes of current user on the page
+      function getNotes() {
+        var userToken = Cookies.get('token');
+
+        var settings = {
+          "method": "POST",
+          "crossDomain": true,
+          "url": "/service/notes/getAll",
+          "data": userToken
+        };
+
+        $.ajax(settings).done(function(response) {
+          if (response === undefined) {
+            $("#wrapper").html('<h1 class="text-center noNoteMessage"><a href="addNote.html">No notes found<br/><small>Create new note</small></a></h1>');
+          } else {
+            var noteTemplate = '<div class="col-md-3"><div class="well note"><p class="text-center caption">%Caption</p><hr class="devider"><p class="content">%Content</p><a class="removeButton" href="#" onclick="removeNote(%Id)"><span class = "glyphicon glyphicon-remove"></span></a><a class="editButton" href="#" onclick="pushToEditNote(%Id)"><span class = "glyphicon glyphicon-cog"></span></a></div></div>';
+            var notes = JSON.parse(response);
+            var count = 0;
+            $("#wrapper").append('<div class="row">');
+            for (var i = 0; i < notes.length; i++) {
+              if (i % 4 == 0 && i != 0) {
+                $("#wrapper").append('</div><div class="row">');
+              }
+              var caption = notes[i].caption;
+              var content = notes[i].content;
+              var noteId = notes[i].id;
+
+              var note = noteTemplate.replace("%Caption", caption).replace("%Content", content).replaceAll("%Id", noteId);
+              $("#wrapper").append(note);
+            }
+            $("#wrapper").append('</div>');
+
+            //For modal window
+            $(document).ready(function(){
+              $(".editButton").click(function() {
+                $("#myModalBox").modal('show');
+              })
+            });
+          }
+        }).fail(function (jqXHR, textStatus) {
+          deleteCookies(jqXHR);
+        });
+      }
+
+
+      //Delete note with certain id
+      function removeNote(id) {
+        if (confirm("Are you sure you want to remove this note?")) {
+          var token = Cookies.get('token');
+          var data = token + "&" + id;
+          var settings = {
+            "method": "POST",
+            "crossDomain": true,
+            "url": "/service/notes/delete",
+            "data": data
+          };
+
+          $.ajax(settings).done(function(response) {
+            window.location = "/";
+          }).fail(function (jqXHR, textStatus) {
+            deleteCookies(jqXHR);
+          });
+        }
+      }
+
+
+      function pushToEditNote(id) {
+        var token = Cookies.get('token');
+        var data = token + "&" + id;
+
+        var settings = {
+          "method": "POST",
+          "crossDomain": true,
+          "url": "/service/notes/get",
+          "data": data
+        };
+
+        $.ajax(settings).done(function(response) {
+          var data = JSON.parse(response);
+
+          var caption = data.caption;
+          var content = data.content;
+
+          $("#inputCaption").attr("value", caption);
+          $("#inputContent").html(content);
+          $("#formform").submit(function() {
+            editNote(id);
+          });
+        }).fail(function (jqXHR, textStatus) {
+          deleteCookies(jqXHR);
+        });
+      }
+
+      function editNote(id) {
+        var formData = $("#formform").serializeArray();
+
+        var noteCaption = formData["0"].value;
+        var noteContent = formData["1"].value;
+
+        var data = {
+          token: Cookies.get('token'),
+          noteId: id,
+          caption:noteCaption,
+          content: noteContent
+        };
+
+        var jsonString = JSON.stringify(data);
+
+        var settings = {
+          "method": "POST",
+          "crossDomain": true,
+          "url": "/service/notes/edit",
+          "contentType": 'application/json',
+          "data": jsonString
+        }
+
+        $.ajax(settings).done(function(response) {
+          window.location = "/";
+        }).fail(function (jqXHR, textStatus) {
+          deleteCookies(jqXHR);
+        });
+      }
+
+      function deleteCookies(jqXHR) {
+        if(Cookies.get('login') != undefined) {
+          Cookies.remove('login');
+        }
+        if (Cookies.get('token') != undefined) {
+          Cookies.remove('token');
+        }
+        console.log(jqXHR.status + " " + jqXHR.statusText + ". " + jqXHR.responseText);
+        window.location = "/";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+body {
+  background-image: url("../img/b5.png");
+}
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+#footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 0;
+  width: 100%;
+  padding: 1rem;
+  background-color: rgb(94, 92, 92);
+  text-align: center;
+}
+
+#footerText {
+  color: rgb(255, 255, 255);
+}
+
+.wrapper {
+  padding-top: 2vw;
+  min-height: 40vw;
+  background-color: rgb(226, 226, 226);
+  border: 5px solid rgb(0, 0, 0);
+  border-radius: 15px;
+  border-style: outset;
+}
+
+#inputContent {
+  width:100%;
+  resize:none;
+  height: 20vw;
+}
+
+/*Helpful id, will be deleted*/
+/*#cont {
+  border: 2px solid ;
+}*/

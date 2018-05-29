@@ -1,0 +1,114 @@
+body {
+  background-image: url("../img/b5.png");
+}
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+#footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 0;
+  width: 100%;
+  padding: 1rem;
+  background-color: rgb(94, 92, 92);
+  text-align: center;
+}
+
+#footerText {
+  color: rgb(255, 255, 255);
+}
+
+.wrap {
+  min-height: 40vw;
+  background-color: rgb(226, 226, 226);
+  border: 5px solid rgb(0, 0, 0);
+  border-radius: 15px;
+  border-style: outset;
+}
+
+/*Note Selectors */
+.wrap .devider {
+  margin: 0;
+  width:90%;
+  margin:1em auto;
+  border:none;
+  height:2px;
+  background-color: rgb(0, 0, 0);
+}
+
+.wrap .caption {
+  font-weight: bold;
+}
+
+.wrap .content {
+
+}
+
+
+.wrap .note {
+  position: relative;
+  background-color: rgb(255, 222, 0);
+  margin: 10px 10px;
+  padding: 0.5vw;
+  min-height: 10vw;
+  box-shadow: 0 5px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  opacity: 0.4  ;
+  -webkit-transition: all 0.3s ease;;
+ -moz-transition: all 0.3s ease;;
+ -o-transition: all 0.3s ease;;
+ transition: all 0.3s ease;
+}
+
+.wrap .note:hover {
+  opacity: 1;
+  box-shadow: 10px 5px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+/*End note selectors*/
+
+
+/*No note message selectors*/
+.wrap .noNoteMessage {
+  margin-top: 15vw;
+}
+
+.noNoteMessage a {
+  text-shadow: 1px 1px white,
+              2px 2px #777;
+  color: rgb(0, 0, 0);
+  transition: all 1s;
+}
+
+.noNoteMessage a:hover {
+  text-shadow: 1px 1px white,
+      1px 1px rgb(82, 137, 201);
+  color: rgb(184, 0, 0)
+}
+
+.noNoteMessage a:link {
+  text-decoration: none;
+}
+
+/*End no note message selectors*/
+
+/*Buttons of note*/
+.removeButton {
+  position: absolute;
+  right: 0.2vw;
+  top: 0.2vw;
+}
+.editButton {
+  position: absolute;
+  right: 0.2vw; bottom: 0.2vw;
+}
+/*End buttons of note*/
+
+/*Modal window edit message*/
+#inputContent {
+  width:100%;
+  resize:none;
+  height: 20vw;
+}
